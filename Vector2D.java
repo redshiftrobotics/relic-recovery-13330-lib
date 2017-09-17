@@ -25,7 +25,7 @@ public class Vector2D {
     }
     public double GetDirection()
     {
-        return Math.atan2( m_nYComponent / m_nXComponent);
+        return Math.atan2( m_nYComponent, m_nXComponent );
     }
 
     public void Set( Vector2D vNewVector ) { this.SetComponents( vNewVector.GetXComponent(), vNewVector.GetYComponent() ); }
