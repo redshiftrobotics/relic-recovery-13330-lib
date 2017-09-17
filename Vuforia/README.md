@@ -8,8 +8,8 @@ Move `VuforiaTest.java` into `TeamCode/src/main/java/org/firstinspires/ftc/teamc
 Here are the images that you can use to test Vuforia. You can find them all [here](https://firstinspiresst01.blob.core.windows.net/ftc/vumark-us.pdf)
 
 ### Center
-![c](/Users/zoe/saas/robotics/lib/Vuforia/images/c.png)
+![c](https://github.com/redshiftrobotics/lib/raw/master/Vuforia/images/c.png)
 ### Right
-![c](/Users/zoe/saas/robotics/lib/Vuforia/images/r.png)
+![c](https://github.com/redshiftrobotics/lib/raw/master/Vuforia/images/r.png)
 ### Left
-![c](/Users/zoe/saas/robotics/lib/Vuforia/images/l.png)
+![c](https://github.com/redshiftrobotics/lib/raw/master/Vuforia/images/l.png)
