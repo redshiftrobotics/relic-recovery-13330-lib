@@ -1,4 +1,4 @@
-package org.redshiftrobotics.lib;
+package org.redshiftrobotics.lib.encoder;
 
 /**
  * Created by ariporad on 2017-10-03.

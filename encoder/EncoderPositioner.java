@@ -1,9 +1,11 @@
-package org.redshiftrobotics.lib;
+package org.redshiftrobotics.lib.encoder;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.redshiftrobotics.lib.Positioner;
+import org.redshiftrobotics.lib.encoder.Encoder;
 
-public class EncoderPositioner {
+public class EncoderPositioner implements Positioner {
     private class EncoderTracker {
         private Encoder encoder;
 

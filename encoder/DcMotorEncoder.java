@@ -1,4 +1,4 @@
-package org.redshiftrobotics.lib;
+package org.redshiftrobotics.lib.encoder;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
