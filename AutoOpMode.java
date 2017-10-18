@@ -21,8 +21,8 @@ abstract public class AutoOpMode extends OpMode {
     DcMotor m2;
     DcMotor m3;
 
-    PIDManager pid;
-    Positioner positioner;
+    public PIDManager pid;
+    public Positioner positioner;
 
     @Override
     public void init() {
