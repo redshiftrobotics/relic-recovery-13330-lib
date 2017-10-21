@@ -26,10 +26,10 @@ abstract public class AutoOpMode extends OpMode {
 
     @Override
     public void init() {
-        m0 = hardwareMap.dcMotor.get("m0");
-        m1 = hardwareMap.dcMotor.get("m1");
-        m2 = hardwareMap.dcMotor.get("m2");
-        m3 = hardwareMap.dcMotor.get("m3");
+        m0 = hardwareMap.dcMotor.get("fl");
+        m1 = hardwareMap.dcMotor.get("bl");
+        m2 = hardwareMap.dcMotor.get("fr");
+        m3 = hardwareMap.dcMotor.get("br");
 
         pid = new FakePIDManager(m0, m1, m2, m3);
         positioner = new EncoderPositioner(new DoubleDcMotorEncoder(m0, m1), new DoubleDcMotorEncoder(m2, m3), TICKS_PER_CM);

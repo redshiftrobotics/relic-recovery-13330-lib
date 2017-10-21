@@ -10,8 +10,6 @@ public class DcMotorEncoder implements Encoder {
 
     public DcMotorEncoder(DcMotor motor) {
         this.motor = motor;
-        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        motor.setPower(0);
     }
 
     @Override
