@@ -106,7 +106,7 @@ public class UltrasonicDistanceSensor extends I2cDeviceSynchDevice<I2cDeviceSync
         // TODO: return DistanceUnit.infinity for out of range and below range values.
         int reading = getNextReading();
         startReading();
-        if (telemetry != null) { telemetry.addData("unsanitized reading", reading); }
+       // if (telemetry != null) { telemetry.addData("unsanitized reading", reading); telemetry.update();}
         return unit.fromUnit(SENSOR_DISTANCE_UNIT, reading == 0 || reading < 25 ? DistanceUnit.infinity : reading);
     }
 
