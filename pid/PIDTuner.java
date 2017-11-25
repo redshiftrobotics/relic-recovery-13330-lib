@@ -22,7 +22,7 @@ public class PIDTuner extends LinearOpMode {
 
     boolean lastPressedB = false, lastPressedX = false, lastPressedY = false;
 
-    static double INCREMENT = 0.5;
+    static double INCREMENT = 1;
     static long STRAIGHT_SECONDS = 5000;
     static boolean TUNING_TURNING = true;
     @Override
@@ -50,11 +50,11 @@ public class PIDTuner extends LinearOpMode {
          */
 
 
-        robot.imupidController.setTuning(150f, 2.0e-4f, 0);
+        robot.imupidController.setTuning(100f, 0.0069f, 0);
 
         waitForStart();
 
-        telemetry.addLine("PID tuning opmode.\n Press B to increment P, X " +
+        telemetry.addLine("PID tuning opmode.\n Press B t increment P, X " +
                 "to increment I, and Y to increment D. Use the up DPAD Arrow + bound button decreases P, I, or D ");
         telemetry.update();
 
@@ -66,6 +66,7 @@ public class PIDTuner extends LinearOpMode {
                     " D: " + robot.imupidController.dConst,
                     ""
             );
+            telemetry.addData("current imu angle: ", robot.imupidController.imu.getAngularRotationX());
 
             telemetry.update();
             if (gamepad1.b && !lastPressedB) {
@@ -94,13 +95,18 @@ public class PIDTuner extends LinearOpMode {
 
            if (gamepad1.y && !lastPressedY) {
                if (gamepad1.dpad_up) {
-                   robot.imupidController.dConst -= INCREMENT;
+                   robot.imupidController.dConst -= INCREMENT/1000;
                } else {
-                   robot.imupidController.dConst += INCREMENT;
+                   robot.imupidController.dConst += INCREMENT/1000;
                }
                lastPressedY = true;
            } else if (!gamepad1.y) {
                lastPressedY = false;
+           }
+
+           if (gamepad1.dpad_down) {
+               telemetry.addData("Resetting target: ", "");
+               robot.imupidController.resetTarget();
            }
 
             if (gamepad1.a) {

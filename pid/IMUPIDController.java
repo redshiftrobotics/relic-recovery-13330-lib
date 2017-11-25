@@ -1,11 +1,13 @@
 package org.redshiftrobotics.lib.pid;
 
+import com.qualcomm.robotcore.util.Range;
+
 /**
  * Created by adam on 9/16/17.
  */
 
 public class IMUPIDController {
-    static boolean newIMU = false;
+    static boolean newIMU = true;
     /**
      * Instance of an IMU interface implementation which
      * will allow us to get imu data.
@@ -25,6 +27,8 @@ public class IMUPIDController {
 
     // Our current delta time that holds the time between current and last calculations.
     float dT;
+
+    static float MAX_I = 5f; // The I term can never go past this value with current tunings
 
 
     /**
@@ -67,12 +71,13 @@ public class IMUPIDController {
     }
 
     public void calculateI() {
-        I += P * dT / 1000;
+        I += P * dT / 1000f;
+        I = Range.clip(I, -MAX_I, MAX_I);
     }
 
     // d e(t) / dt
     public void calculateD() {
-        D = (P - lastError) / (dT/1000);
+        D = (P - lastError) / (dT/1000f);
     }
 
     public double calculatePID(long deltaTime) {
@@ -81,7 +86,7 @@ public class IMUPIDController {
         calculateI();
         calculateD();
 
-        return pConst * P + iConst * I / 2000 + dConst * D / 2000;
+        return pConst * P + iConst * I / 2000f + dConst * D / 2000f;
     }
 
     public void setTuning(float pTuning, float iTuning, float dTuning) {
