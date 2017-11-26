@@ -2,24 +2,29 @@ package org.redshiftrobotics.lib.pid;
 
 import com.qualcomm.robotcore.util.Range;
 
+import org.redshiftrobotics.lib.config.ConfigurationManager;
+
 /**
  * Created by adam on 9/16/17.
  */
 
 public class IMUPIDController {
-    static boolean newIMU = true;
+    static boolean newIMU;
+    static boolean DEBUG;
+
     /**
      * Instance of an IMU interface implementation which
      * will allow us to get imu data.
      */
     IMU imu;
 
+    private ConfigurationManager conf;
 
     // Proportional, Integral, and Derivative Terms of the PID formula
     public float P = 0f, I = 0f, D = 0f;
 
     // Proportional, Integral, and Derivative Constants for Tuning
-    float pConst = 1f, iConst = 1f, dConst = 1f;
+    float pConst, iConst, dConst;
 
     public float lastError;
 
@@ -28,7 +33,7 @@ public class IMUPIDController {
     // Our current delta time that holds the time between current and last calculations.
     float dT;
 
-    static float MAX_I = 5f; // The I term can never go past this value with current tunings
+    static float MAX_I; // The I term can never go past this value with current tunings
 
 
     /**
@@ -38,13 +43,21 @@ public class IMUPIDController {
      */
     public IMUPIDController(IMU imu) {
         this.imu = imu;
+
+        conf = ConfigurationManager.getSharedInstance().getConfig("pid");
+
+        pConst = (float) conf.getDouble("pConst");
+        iConst = (float) conf.getDouble("iConst");
+        dConst = (float) conf.getDouble("dConst");
+        MAX_I = (float) conf.getDouble("maxI");
+        newIMU = conf.getBoolean("newIMU");
+        DEBUG = conf.getBoolean("debug", false);
     }
 
     /**
      * Calculates the current imu
      */
 
-    public static boolean DEBUG = false;
 
     public void calculateP() {
 
@@ -89,10 +102,11 @@ public class IMUPIDController {
         return pConst * P + iConst * I / 2000f + dConst * D / 2000f;
     }
 
-    public void setTuning(float pTuning, float iTuning, float dTuning) {
+    public void setTuning(float pTuning, float iTuning, float dTuning, float maxI) {
         this.pConst = pTuning;
         this.iConst = iTuning;
         this.dConst = dTuning;
+        this.MAX_I = maxI;
     }
 
     public void setTarget(float targetAngle) {
