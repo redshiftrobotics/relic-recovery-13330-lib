@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.competition.MecanumRobot;
+import org.redshiftrobotics.lib.MecanumRobot;
 
 /**
  * Created by Duncan on 10/14/2017.
