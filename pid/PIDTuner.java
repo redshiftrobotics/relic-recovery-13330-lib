@@ -1,6 +1,7 @@
 package org.redshiftrobotics.lib.pid;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -11,6 +12,7 @@ import org.redshiftrobotics.lib.MecanumRobot;
  * Created by Duncan on 10/14/2017.
  */
 @TeleOp(name="PID Tuner")
+@Disabled
 public class PIDTuner extends LinearOpMode {
 
     BNO055IMU imu;

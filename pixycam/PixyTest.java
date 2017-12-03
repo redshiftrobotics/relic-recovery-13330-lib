@@ -1,12 +1,14 @@
 package org.redshiftrobotics.lib.pixycam;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 /**
  * Created by Duncan on 10/1/2017.
  */
 @Autonomous(name="PixySensor")
+@Disabled
 public class PixyTest extends OpMode {
 
     PixyCam pixyCam;

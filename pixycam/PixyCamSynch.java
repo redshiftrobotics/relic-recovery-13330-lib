@@ -1,10 +1,12 @@
 package org.redshiftrobotics.lib.pixycam;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
 
 @Autonomous(name = "Sensor: PixySynch", group = "Sensor")
+@Disabled
 public class PixyCamSynch extends LinearOpMode {
     I2cDeviceSynch pixy;
     byte[] readCache;
