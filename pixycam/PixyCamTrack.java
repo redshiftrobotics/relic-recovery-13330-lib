@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 @Autonomous(name="Pixy Cam Tracking")
 @Disabled
+
 public class PixyCamTrack extends LinearOpMode {
 
     I2cDeviceSynch pixy;
