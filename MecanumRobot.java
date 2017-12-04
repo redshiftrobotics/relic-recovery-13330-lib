@@ -71,12 +71,20 @@ public class MecanumRobot {
         this.backRight = br;
         this.encoderMotor = this.backLeft;
 
+        tm.addLine("Finished setting motors");
+        tm.update();
+
         imuImpl = new IMUImpl(imu);
     //    xyController = new CoordinatePIDController(detector);
         imupidController = new IMUPIDController(imuImpl);
         imupidController.setTarget(TARGET_ANGLE_INITIAL);
+
+        tm.addLine("Finished doing imu stuff");
+        tm.update();
         this.context = context;
         this.tm = tm;
+        tm.addLine("Robot constructed");
+        tm.update();
     }
 
     //TODO: Delete if we really won't need the below
