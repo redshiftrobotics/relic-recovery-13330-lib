@@ -6,7 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.redshiftrobotics.lib.MecanumRobot;
+import org.firstinspires.ftc.teamcode.lib.MecanumRobot;
+import org.firstinspires.ftc.teamcode.lib.PulsarRobotHardware;
 
 /**
  * Created by Duncan on 10/14/2017.
@@ -37,11 +38,7 @@ public class PIDTuner extends LinearOpMode {
         imu = hardwareMap.get(BNO055IMU.class, "imu");
 
 
-        robot = new MecanumRobot(frontLeft,
-                frontRight,
-                backLeft,
-                backRight,
-                imu, this, telemetry);
+        robot = new MecanumRobot(new PulsarRobotHardware(hardwareMap, null), this, telemetry);
 
         // Working constants:
 
