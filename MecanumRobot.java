@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.competition.Tween;
 import org.firstinspires.ftc.teamcode.lib.EncoderDistanceConverter;
 import org.redshiftrobotics.lib.pid.IMUImpl;
 import org.redshiftrobotics.lib.pid.IMUPIDController;
@@ -53,6 +54,8 @@ public class MecanumRobot {
     // Simple debug enable/disable
     static boolean DEBUG = true;
 
+    static long TWEEN_ACCEL_TIME_MILLIS = 700;
+
     /** Primary Constructor
      *
      * @param fl Front left motor
@@ -70,6 +73,11 @@ public class MecanumRobot {
         this.backLeft = bl;
         this.backRight = br;
         this.encoderMotor = this.backLeft;
+
+        fl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        fr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        bl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        br.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         tm.addLine("Finished setting motors");
         tm.update();
@@ -392,6 +400,10 @@ public class MecanumRobot {
             frontRight.setPower(frontRightPower);
             backLeft.setPower(backLeftPower);
             backRight.setPower(backRightPower);
+        }
+
+        public double calculateTweenPower(long totalRunTime, long elapsedTime, float startSpeed, float endSpeed) {
+            return Tween.interpolateTweenCurve(totalRunTime, elapsedTime, startSpeed, endSpeed, TWEEN_ACCEL_TIME_MILLIS);
         }
 
          // Simple helper method to improve readability.
