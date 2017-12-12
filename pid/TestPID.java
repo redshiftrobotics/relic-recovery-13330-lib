@@ -15,7 +15,6 @@ import org.firstinspires.ftc.teamcode.lib.PulsarRobotHardware;
  */
 
 @Autonomous(name = "Test Pid")
-@Disabled
 public class TestPID extends LinearOpMode {
 
     MecanumRobot robot;
@@ -28,13 +27,17 @@ public class TestPID extends LinearOpMode {
 
         waitForStart();
 
-        robot.moveStraight(1,  3*Math.PI/2, 2000, 10);
+       /* robot.moveStraight(1,  3*Math.PI/2, 2000, 10);
 
         telemetry.addData("Turning... ", "");
         telemetry.update();
         robot.turn(45, 5000);
+        robot.moveStraight(1,  3*Math.PI/2, 2000, 10);
         robot.turn(90, 5000);
+        robot.moveStraight(1,  3*Math.PI/2, 2000, 10);
         robot.turn(-90, 5000);
+        robot.moveStraight(1,  3*Math.PI/2, 2000, 10);*/
 
+        robot.moveStraightMillis(0.6f, 3*Math.PI/2, 3400);
     }
 }
