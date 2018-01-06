@@ -9,73 +9,80 @@ public class Vector2D {
     private double m_nYComponent;
 
 
-    public Vector2D( Vector2D vecVector ) { 
-        this.m_nXComponent = vecVector.GetXComponent();
-        this.m_nYComponent = vecVector.GetYComponent();
+    public Vector2D(Vector2D vecVector) {
+        this.m_nXComponent = vecVector.getXComponent();
+        this.m_nYComponent = vecVector.getYComponent();
     }
 
-    public Vector2D( double nXComponent, double nYComponent ) 
-    {
+    public Vector2D(double nXComponent, double nYComponent) {
         m_nXComponent = nXComponent;
         m_nYComponent = nYComponent;
     }
 
-    public double GetXComponent() { return m_nXComponent; }
-    public double GetYComponent() { return m_nYComponent; }
-
-    public double GetMagnitude()
-    {
-        return Math.sqrt( ( Math.pow(m_nXComponent, 2 ) ) + ( Math.pow(m_nYComponent, 2 ) ) );
-    }
-    public double GetDirection()
-    {
-        return Math.atan2( m_nYComponent, m_nXComponent );
+    public double getXComponent() {
+        return m_nXComponent;
     }
 
-    public void Set( Vector2D vNewVector ) { this.SetComponents( vNewVector.GetXComponent(), vNewVector.GetYComponent() ); }
-    public void SetPolar( double nMagnitude, double nDirection )
-    {
-        m_nXComponent = nMagnitude * Math.cos( nDirection );
-        m_nYComponent = nMagnitude * Math.sin( nDirection );
+    public double getYComponent() {
+        return m_nYComponent;
     }
-    public void SetComponents( double nXComponent, double nYComponent )
-    {
+
+    public double getMagnitude() {
+        return Math.sqrt(Math.pow(m_nXComponent, 2) + Math.pow(m_nYComponent, 2));
+    }
+
+    public double getDirection() {
+        return Math.atan2(m_nYComponent, m_nXComponent);
+    }
+
+    public void set(Vector2D vNewVector) {
+        this.setComponents(vNewVector.getXComponent(), vNewVector.getYComponent());
+    }
+
+    public void setPolar(double nMagnitude, double nDirection) {
+        m_nXComponent = nMagnitude * Math.cos(nDirection);
+        m_nYComponent = nMagnitude * Math.sin(nDirection);
+    }
+
+    public void setComponents(double nXComponent, double nYComponent) {
         m_nXComponent = nXComponent;
         m_nYComponent = nYComponent;
     }
 
-    public void Add( Vector2D vDelta ) { this.AddComponents( vDelta.GetXComponent(), vDelta.GetYComponent() ); }
-    public void AddPolar( double nMagnitude, double nDirection )
-    {
-        m_nXComponent += nMagnitude * Math.cos( nDirection );
-        m_nYComponent += nMagnitude * Math.sin( nDirection );
+    public void add(Vector2D vDelta) {
+        this.addComponents(vDelta.getXComponent(), vDelta.getYComponent());
     }
-    public void AddComponents( double nXComponent, double nYComponent )
-    {
+
+    public void addPolar(double nMagnitude, double nDirection) {
+        m_nXComponent += nMagnitude * Math.cos(nDirection);
+        m_nYComponent += nMagnitude * Math.sin(nDirection);
+    }
+
+    public void addComponents(double nXComponent, double nYComponent) {
         m_nXComponent += nXComponent;
         m_nYComponent += nYComponent;
     }
 
-    public void Multiply( Vector2D vVector ) { this.MultiplyComponents( vVector.GetXComponent(), vVector.GetYComponent() ); }
-    public void MultiplyPolar( double nMagnitude, double nDirection )
-    {
-        m_nXComponent *= nMagnitude * Math.cos( nDirection );
-        m_nYComponent *= nMagnitude * Math.sin( nDirection );
+    public void multiply(Vector2D vVector) {
+        this.multiplyComponents(vVector.getXComponent(), vVector.getYComponent());
     }
-    public void MultiplyComponents( double nXComponent, double nYComponent )
-    {
+
+    public void multiplyPolar(double nMagnitude, double nDirection) {
+        m_nXComponent *= nMagnitude * Math.cos(nDirection);
+        m_nYComponent *= nMagnitude * Math.sin(nDirection);
+    }
+
+    public void multiplyComponents(double nXComponent, double nYComponent) {
         m_nXComponent *= nXComponent;
         m_nYComponent *= nYComponent;
     }
 
-    public double DotProduct( Vector2D vVector )
-    {
-        return ( m_nXComponent * vVector.GetXComponent() ) + ( m_nYComponent * vVector.GetYComponent() );
+    public double dotProduct(Vector2D vVector) {
+        return (m_nXComponent * vVector.getXComponent()) + (m_nYComponent * vVector.getYComponent());
     }
-    
-    public void MultiplyScalar( double nFactor )
-    {
-      m_nXComponent *= nFactor;
-      m_nYComponent *= nFactor;
+
+    public void multiplyScalar(double nFactor) {
+        m_nXComponent *= nFactor;
+        m_nYComponent *= nFactor;
     }
 }

@@ -6,6 +6,8 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
  * Created by adam on 9/16/17.
  */
 public class IMUImpl implements IMU {
+    public static double IMU_ADDER = 180;
+
     BNO055IMU imu;
     BNO055IMU.Parameters imuParameters;
 
@@ -24,17 +26,17 @@ public class IMUImpl implements IMU {
     }
 
     @Override
-    public float getAngularRotationX() {
-        return this.imu.getAngularOrientation().firstAngle;
+    public double getAngularRotationX() {
+        return imu.getAngularOrientation().firstAngle + IMU_ADDER;
     }
 
     @Override
-    public float getAngularRotationY() {
-        return this.imu.getAngularOrientation().secondAngle;
+    public double getAngularRotationY() {
+        return imu.getAngularOrientation().secondAngle + IMU_ADDER;
     }
 
     @Override
-    public float getAngularRotationZ() {
-        return this.imu.getAngularOrientation().thirdAngle;
+    public double getAngularRotationZ() {
+        return imu.getAngularOrientation().thirdAngle + IMU_ADDER;
     }
 }

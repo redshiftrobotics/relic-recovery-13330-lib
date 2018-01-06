@@ -22,8 +22,8 @@ public class TestPID extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         robot = new MecanumRobot(new PulsarRobotHardware(hardwareMap, PulsarAuto.Alliance.BLUE), this, telemetry);
-      //  robot.imupidController.setTuning(0, 0, 0);
-       // robot.imupidController.setTuning(1, 1, 1);
+      //  robot.PIDCalculator.setTuning(0, 0, 0);
+       // robot.PIDCalculator.setTuning(1, 1, 1);
 
         waitForStart();
 

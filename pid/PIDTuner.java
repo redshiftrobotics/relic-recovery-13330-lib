@@ -49,7 +49,7 @@ public class PIDTuner extends LinearOpMode {
          */
 
 
-        robot.imupidController.setTuning(100f, 0.0069f, 0);
+        robot.PIDCalculator.setTuning(100f, 0.0069f, 0);
 
         waitForStart();
 
@@ -60,19 +60,19 @@ public class PIDTuner extends LinearOpMode {
         int times = 0;
 
         while (opModeIsActive()) {
-            telemetry.addData("P: " + robot.imupidController.pConst +
-                    " I: " + robot.imupidController.iConst +
-                    " D: " + robot.imupidController.dConst,
+            telemetry.addData("P: " + robot.PIDCalculator.pConst +
+                    " I: " + robot.PIDCalculator.iConst +
+                    " D: " + robot.PIDCalculator.dConst,
                     ""
             );
-            telemetry.addData("current imu angle: ", robot.imupidController.imu.getAngularRotationX());
+            telemetry.addData("current imu angle: ", robot.PIDCalculator.imu.getAngularRotationX());
 
             telemetry.update();
             if (gamepad1.b && !lastPressedB) {
                 if (gamepad1.dpad_up) {
-                    robot.imupidController.pConst -= INCREMENT;
+                    robot.PIDCalculator.pConst -= INCREMENT;
                 } else {
-                    robot.imupidController.pConst += INCREMENT;
+                    robot.PIDCalculator.pConst += INCREMENT;
                 }
                 lastPressedB = true;
                 times++;
@@ -83,9 +83,9 @@ public class PIDTuner extends LinearOpMode {
 
             if (gamepad1.x && !lastPressedX) {
                 if (gamepad1.dpad_up) {
-                    robot.imupidController.iConst -= INCREMENT/10000;
+                    robot.PIDCalculator.iConst -= INCREMENT/10000;
                 } else {
-                    robot.imupidController.iConst += INCREMENT/10000;
+                    robot.PIDCalculator.iConst += INCREMENT/10000;
                 }
                 lastPressedX = true;
             } else if (!gamepad1.x) {
@@ -94,9 +94,9 @@ public class PIDTuner extends LinearOpMode {
 
            if (gamepad1.y && !lastPressedY) {
                if (gamepad1.dpad_up) {
-                   robot.imupidController.dConst -= INCREMENT/1000;
+                   robot.PIDCalculator.dConst -= INCREMENT/1000;
                } else {
-                   robot.imupidController.dConst += INCREMENT/1000;
+                   robot.PIDCalculator.dConst += INCREMENT/1000;
                }
                lastPressedY = true;
            } else if (!gamepad1.y) {
@@ -105,7 +105,7 @@ public class PIDTuner extends LinearOpMode {
 
            if (gamepad1.dpad_down) {
                telemetry.addData("Resetting target: ", "");
-               robot.imupidController.resetTarget();
+               robot.PIDCalculator.resetTarget();
            }
 
             if (gamepad1.a) {
@@ -115,7 +115,7 @@ public class PIDTuner extends LinearOpMode {
                     robot.moveStraight(0.5f, Math.PI/2, 3000, STRAIGHT_SECONDS);
                 }
                 robot.STOP();
-                robot.imupidController.resetTarget();
+                robot.PIDCalculator.resetTarget();
             }
         }
     }
