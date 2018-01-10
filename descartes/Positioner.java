@@ -1,4 +1,4 @@
-package org.redshiftrobotics.lib;
+package org.redshiftrobotics.lib.descartes;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 

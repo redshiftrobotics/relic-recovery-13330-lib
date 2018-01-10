@@ -2,7 +2,8 @@ package org.redshiftrobotics.lib.pid;
 
 import com.qualcomm.robotcore.util.Range;
 
-import org.redshiftrobotics.lib.DebugHelper;
+import org.redshiftrobotics.lib.debug.DebugHelper;
+import org.redshiftrobotics.lib.pid.imu.IMU;
 
 /**
  * Created by adam on 9/16/17.

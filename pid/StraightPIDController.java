@@ -2,8 +2,9 @@ package org.redshiftrobotics.lib.pid;
 
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.lib.ASAMController;
+import org.redshiftrobotics.lib.asam.ASAMController;
 import org.redshiftrobotics.lib.RobotHardware;
+import org.redshiftrobotics.lib.Vector2D;
 
 public class StraightPIDController extends PIDController {
     private Vector2D velocity;
@@ -21,7 +22,7 @@ public class StraightPIDController extends PIDController {
 
     @Override
     void applyMotorPower(double correction, long elapsedTime) {
-        double tweenPower = ASAMController.interpolateTweenCurve(time, elapsedTime, 0, (float) velocity.getXComponent(), tweenTime);
+        double tweenPower = ASAMController.computeMotorPower(time, elapsedTime, 0, (float) velocity.getXComponent(), tweenTime);
         hw.applyMotorPower(velocity.getXComponent(), tweenPower, correction);
     }
 

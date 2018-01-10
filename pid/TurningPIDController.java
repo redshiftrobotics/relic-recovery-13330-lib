@@ -11,7 +11,7 @@ public class TurningPIDController extends PIDController {
 
     @Override
     PIDCalculator.PIDTuning getTuning() {
-        hw.getTurningTuning();
+        return hw.getTurningTuning();
     }
 
     public void turn(double angle, long time){
@@ -33,7 +33,7 @@ public class TurningPIDController extends PIDController {
     boolean predicate() {
         return (
                 withinThreshold(pidCalculator.P, hw.getTurningAngleThreshold()) &&
-                withinThreshold(pidCalculator.lastError, hw.getTurningAngleThreshold()
+                withinThreshold(pidCalculator.lastError, hw.getTurningAngleThreshold())
         );
     }
 

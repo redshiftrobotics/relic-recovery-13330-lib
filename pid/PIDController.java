@@ -1,12 +1,14 @@
 package org.redshiftrobotics.lib.pid;
 
-import org.redshiftrobotics.lib.DebugHelper;
+import org.redshiftrobotics.lib.debug.DebugHelper;
 import org.redshiftrobotics.lib.RobotHardware;
+import org.redshiftrobotics.lib.pid.imu.IMU;
+import org.redshiftrobotics.lib.pid.imu.IMUWrapper;
 
 public abstract class PIDController {
     abstract PIDCalculator.PIDTuning getTuning();
     abstract void applyMotorPower(double correction, long elapsedTime);
-    boolean predicate() { return true };
+    boolean predicate() { return true; }
 
     private final IMU imu;
     protected final RobotHardware hw;
@@ -15,7 +17,7 @@ public abstract class PIDController {
     public PIDController(RobotHardware hw) {
         this.hw = hw;
 
-        imu = new IMUImpl(hw.getIMU());
+        imu = new IMUWrapper(hw.getIMU());
         pidCalculator = new PIDCalculator(imu);
     }
 
@@ -23,7 +25,7 @@ public abstract class PIDController {
         pidCalculator.setTuning(getTuning());
         pidCalculator.clearData();
 
-        long elapsedTime;
+        long elapsedTime = 0;
         long startTime = System.currentTimeMillis();
         long loopTime = System.currentTimeMillis();
 

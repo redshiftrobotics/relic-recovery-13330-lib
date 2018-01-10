@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.hardware.*;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
-import org.redshiftrobotics.lib.Positioner;
 
 public class DescartesPositioner implements Positioner {
     public class SputnikSensor {

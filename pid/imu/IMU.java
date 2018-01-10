@@ -1,4 +1,4 @@
-package org.redshiftrobotics.lib.pid;
+package org.redshiftrobotics.lib.pid.imu;
 
 /**
  * Created by adam on 9/16/17.

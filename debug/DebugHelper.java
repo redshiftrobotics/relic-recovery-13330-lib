@@ -1,7 +1,6 @@
-package org.redshiftrobotics.lib;
+package org.redshiftrobotics.lib.debug;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.internal.opmode.TelemetryImpl;
 
 public class DebugHelper {
     private static boolean enabled = false;
@@ -36,5 +35,9 @@ public class DebugHelper {
     public static void update() {
         if (!enabled || telemetry == null) return;
         telemetry.update();
+    }
+
+    public static boolean getEnabled() {
+        return enabled;
     }
 }
