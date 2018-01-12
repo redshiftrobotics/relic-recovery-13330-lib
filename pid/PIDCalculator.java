@@ -33,7 +33,7 @@ public class PIDCalculator {
 
     // Proportional, Integral, and Derivative Terms of the PID formula
     public double P = 0, I = 0, D = 0;
-    public double lastError;
+    public double lastError = 0;
     public double target;
 
     // Our current delta time that holds the time between current and last calculations.
@@ -50,13 +50,17 @@ public class PIDCalculator {
         resetTarget();
     }
 
-    public void calculateP() {
+    /** Calculate P using the most efficient angular correction possible.
+     *
+     */
+    private void calculateP() {
         double angle = imu.getAngularRotationX();
 
         lastError = P;
 
         DebugHelper.addData("angle", angle);
         DebugHelper.addData("target", target);
+
 
         // We have to determine what the most efficient way to turn is (we should never turn
         // more than 180 degrees to hit a target).
@@ -67,18 +71,38 @@ public class PIDCalculator {
         } else if (angle -  target <= 180) {
             P = (angle -  target);
         }
+
+        System.out.println("angle: " + angle + " target: " + target + "P: " + P);
     }
 
+    /** Continuously approximates the cumulative integral of the e(t) function using
+     * finite Riemann sums.
+     *
+     */
     public void calculateI() {
+        System.out.println("P: " + P + " dT: " + deltaTime);
         I += P * deltaTime / 1000f;
         I = Range.clip(I, -tuning.MAX_I, tuning.MAX_I);
+
     }
 
-    public void calculateD() {
-        D = (P - lastError) / (deltaTime /1000f);
+    /** Internal member to calculate D. Approximates the current derivative
+     * of the error function e(t). Scales down by 1000;
+     *
+     */
+    private void calculateD() {
+        System.out.println("dT is about to be divided by and is: " + deltaTime);
+        D = ((P - lastError) / deltaTime) / 1000;
+        System.out.println("D: " + D);
     }
 
-    public double calculatePID(long deltaTime) {
+    /** Calculate PID by adding the P, I, and D terms together.
+     *
+     * @param deltaTime the current time delta in seconds. Must be converted beforehand.
+     * @return
+     */
+    public double calculatePID(double deltaTime) {
+        System.out.println("dT: " + deltaTime);
         this.deltaTime = deltaTime;
         calculateP();
         calculateI();

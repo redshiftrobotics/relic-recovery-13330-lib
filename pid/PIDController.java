@@ -30,7 +30,7 @@ public abstract class PIDController {
         long loopTime = System.currentTimeMillis();
 
         do {
-            double correction = pidCalculator.calculatePID(loopTime/1000);
+            double correction = pidCalculator.calculatePID((double)loopTime/1000);
 
             DebugHelper.addData("Correction", correction);
             DebugHelper.addData("P", pidCalculator.P);
