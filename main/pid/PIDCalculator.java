@@ -17,13 +17,16 @@ public class PIDCalculator {
 
         public final double MAX_I;
 
-        public PIDTuning(double P, double I, double D) { this(P, I, D, 5); }
+        public final double TURNING_THRESHOLD;
 
-        public PIDTuning(double P, double I, double D, double MAX_I) {
+        public PIDTuning(double P, double I, double D) { this(P, I, D, 5, 0); }
+
+        public PIDTuning(double P, double I, double D, double MAX_I, double turningThreshold) {
             this.P = P;
             this.I = I;
             this.D = D;
             this.MAX_I = MAX_I;
+            this.TURNING_THRESHOLD = turningThreshold;
         }
     }
 

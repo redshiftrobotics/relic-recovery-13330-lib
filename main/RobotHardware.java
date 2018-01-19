@@ -17,6 +17,5 @@ public interface RobotHardware {
 
     PIDCalculator.PIDTuning getStraightTurning();
     PIDCalculator.PIDTuning getTurningTuning();
-    double getTurningAngleThreshold();
 }
 
