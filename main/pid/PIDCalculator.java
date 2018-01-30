@@ -35,6 +35,7 @@ public class PIDCalculator {
     public double P = 0, I = 0, D = 0;
     public double lastError = 0;
     public double target;
+    public double angle;
 
     // Our current delta time that holds the time between current and last calculations.
     private double deltaTime;
@@ -54,13 +55,9 @@ public class PIDCalculator {
      *
      */
     private void calculateP() {
-        double angle = imu.getAngularRotationX();
+        angle = imu.getAngularRotationX();
 
         lastError = P;
-
-        DebugHelper.addData("angle", angle);
-        DebugHelper.addData("target", target);
-
 
         // We have to determine what the most efficient way to turn is (we should never turn
         // more than 180 degrees to hit a target).
@@ -71,8 +68,6 @@ public class PIDCalculator {
         } else if (angle -  target <= 180) {
             P = (angle -  target);
         }
-
-        System.out.println("angle: " + angle + " target: " + target + "P: " + P);
     }
 
     /** Continuously approximates the cumulative integral of the e(t) function using
@@ -80,7 +75,6 @@ public class PIDCalculator {
      *
      */
     public void calculateI() {
-        System.out.println("P: " + P + " dT: " + deltaTime);
         I += P * deltaTime / 1000f;
         I = Range.clip(I, -tuning.MAX_I, tuning.MAX_I);
 
@@ -91,9 +85,7 @@ public class PIDCalculator {
      *
      */
     private void calculateD() {
-        System.out.println("dT is about to be divided by and is: " + deltaTime);
         D = ((P - lastError) / deltaTime) / 1000;
-        System.out.println("D: " + D);
     }
 
     /** Calculate PID by adding the P, I, and D terms together.
@@ -102,11 +94,18 @@ public class PIDCalculator {
      * @return
      */
     public double calculatePID(double deltaTime) {
-        System.out.println("dT: " + deltaTime);
         this.deltaTime = deltaTime;
         calculateP();
         calculateI();
         calculateD();
+
+        DebugHelper.addData("PID:dT", deltaTime);
+        DebugHelper.addData("PID:P", P);
+        DebugHelper.addData("PID:I", I);
+        DebugHelper.addData("PID:D", D);
+        DebugHelper.addData("PID:target", target);
+        DebugHelper.addData("PID:angle", angle);
+
 
         return tuning.P * P + tuning.I * I / 2000f + tuning.D * D / 2000f;
     }
