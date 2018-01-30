@@ -31,7 +31,7 @@ public class TurningPIDController extends PIDController {
 
     @Override
     boolean predicate() {
-        return (
+        return !(
                 withinThreshold(pidCalculator.P, hw.getTurningAngleThreshold()) &&
                 withinThreshold(pidCalculator.lastError, hw.getTurningAngleThreshold())
         );
