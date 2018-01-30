@@ -1,18 +1,16 @@
 package org.redshiftrobotics.lib.pid;
 
 
-import com.qualcomm.robotcore.util.Range;
-
-import org.redshiftrobotics.lib.asam.ASAMController;
 import org.redshiftrobotics.lib.RobotHardware;
 import org.redshiftrobotics.lib.Vector2D;
+import org.redshiftrobotics.lib.asam.ASAMController;
 
-public class StraightPIDController extends PIDController {
-    private Vector2D velocity;
-    private long time;
-    private long tweenTime;
+abstract class StraightPIDController extends PIDController {
+    protected Vector2D velocity;
+    protected long time;
+    protected long tweenTime;
 
-    public StraightPIDController(RobotHardware hw) {
+    StraightPIDController(RobotHardware hw) {
         super(hw);
     }
 
@@ -23,19 +21,23 @@ public class StraightPIDController extends PIDController {
 
     @Override
     void applyMotorPower(double correction, long elapsedTime) {
-        double tweenPower = ASAMController.computeMotorPower(time, elapsedTime, 0, (float) velocity.getYComponent(), tweenTime);
-        hw.applyMotorPower(velocity.getXComponent(), tweenPower, correction);
+        // To make the ASAM algorithm simpler, we abs the input, then re-add the sign to the output.
+        double tweenPowerX = Math.signum(velocity.getXComponent()) * ASAMController.computeMotorPower(time, elapsedTime, 0, (float) Math.abs(velocity.getXComponent()), tweenTime);
+        double tweenPowerY = Math.signum(velocity.getYComponent()) * ASAMController.computeMotorPower(time, elapsedTime, 0, (float) Math.abs(velocity.getYComponent()), tweenTime);
+        hw.applyMotorPower(tweenPowerX, tweenPowerY, correction);
     }
 
-    public void moveStraight(double speed, double angle, long time) {
-        moveStraight(speed, angle, time, time / 2);
+    // XXX: Strictly speaking, these don't really belong here, but they make everything else much
+    //      DRYer
+    public void move(double speed, long time) {
+        move(speed, time, time / 2);
     }
-    public void moveStraight(double speed, double angle, long time, long tweenTime) {
+    abstract public void move(double speed, long time, long tweenTime);
+
+    protected void move(long time, long tweenTime, Vector2D velocity) {
         this.time = time;
         this.tweenTime = tweenTime;
-        speed = Range.clip(Math.abs(speed), 0, 1);
-        velocity = new Vector2D(0, 0);
-        velocity.setPolar(speed, angle);
+        this.velocity = velocity;
 
         move(time);
     }

@@ -15,7 +15,10 @@ public interface RobotHardware {
     void applyMotorPower(double velocityX, double velocityY, double correctionAngular);
     void stop();
 
+    boolean getCanStrafe();
+
     PIDCalculator.PIDTuning getStraightTurning();
+    PIDCalculator.PIDTuning getStrafeTuning();
     PIDCalculator.PIDTuning getTurningTuning();
     double getTurningAngleThreshold();
 }
