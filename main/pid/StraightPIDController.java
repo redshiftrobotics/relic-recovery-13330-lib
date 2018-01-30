@@ -23,7 +23,7 @@ public class StraightPIDController extends PIDController {
 
     @Override
     void applyMotorPower(double correction, long elapsedTime) {
-        double tweenPower = ASAMController.computeMotorPower(time, elapsedTime, 0, (float) velocity.getXComponent(), tweenTime);
+        double tweenPower = ASAMController.computeMotorPower(time, elapsedTime, 0, (float) velocity.getYComponent(), tweenTime);
         hw.applyMotorPower(velocity.getXComponent(), tweenPower, correction);
     }
 
