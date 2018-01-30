@@ -14,6 +14,16 @@ public abstract class PIDController {
     protected final RobotHardware hw;
     protected final PIDCalculator pidCalculator;
 
+    private PIDCalculator.PIDTuning tuningOverride;
+
+    public void setTuningOverride(PIDCalculator.PIDTuning tuning) {
+        tuningOverride = tuning;
+    }
+
+    public PIDCalculator.PIDTuning getTuningOverride() {
+        return tuningOverride;
+    }
+
     public PIDController(RobotHardware hw) {
         this.hw = hw;
 
@@ -22,7 +32,7 @@ public abstract class PIDController {
     }
 
     protected void move(long time) {
-        pidCalculator.setTuning(getTuning());
+        pidCalculator.setTuning(tuningOverride != null ? tuningOverride : getTuning());
         pidCalculator.clearData();
 
         long elapsedTime = 0;
