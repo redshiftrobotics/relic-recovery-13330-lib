@@ -24,7 +24,7 @@ public class PIDTuner extends LinearOpMode {
     @Override
     public void runOpMode() {
         final PulsarRobotHardware hw = new PulsarRobotHardware(this, null);
-        final StraightPIDController straightPIDController = new StraightPIDController(hw);
+        final StraightPIDController straightPIDController = new ForwardPIDController(hw);
         final TurningPIDController turningPIDController = new TurningPIDController(hw);
 
         PIDController pidController = straightPIDController;
@@ -77,7 +77,7 @@ public class PIDTuner extends LinearOpMode {
             }
             if (RT && !lastRT) {
                 telemetry.addLine("Moving Forward for 5s at Full Speed");
-                straightPIDController.moveStraight(1, 3 * Math.PI / 2, 5000);
+                straightPIDController.move(1, 5000);
             }
 
             lastA = gamepad1.a;
