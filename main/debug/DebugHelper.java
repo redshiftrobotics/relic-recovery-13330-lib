@@ -4,7 +4,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class DebugHelper {
     // WARNING: DO NOT change this value! If you want to enable debugging, use the Debugger OpMode!
-    private static boolean enabled = false;
+    private static boolean enabled = true;
     private static Telemetry telemetry;
 
     public static boolean isEnabled() { return enabled; }

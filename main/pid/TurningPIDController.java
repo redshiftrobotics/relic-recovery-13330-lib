@@ -24,6 +24,17 @@ public class TurningPIDController extends PIDController {
         move(time);
     }
 
+    public void turnToTarget(double target, long time) {
+        turnToTarget(target, time, 0.5);
+    }
+
+    public void turnToTarget(double target, long time, double powerConstant) {
+        this.powerConstant = powerConstant;
+        pidCalculator.setTarget(target);
+
+        move(time);
+    }
+
     @Override
     void applyMotorPower(double correction, long elapsedTime) {
         hw.applyMotorPower(0, 0, powerConstant + correction);

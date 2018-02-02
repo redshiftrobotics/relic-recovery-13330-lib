@@ -6,6 +6,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.redshiftrobotics.lib.RobotHardware;
+import org.redshiftrobotics.lib.blockplacer.Col;
 
 public class VuforiaController {
     private final VuforiaLocalizer.Parameters parameters;
@@ -38,8 +39,8 @@ public class VuforiaController {
 
     }
 
-    public RelicRecoveryVuMark detectColumn() {
+    public Col detectColumn() {
         relicTrackables.activate();
-        return RelicRecoveryVuMark.from(relicTemplate);
+        return Col.fromVuMark(RelicRecoveryVuMark.from(relicTemplate));
     }
 }

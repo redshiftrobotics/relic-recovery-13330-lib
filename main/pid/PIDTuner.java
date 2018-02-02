@@ -24,7 +24,7 @@ public class PIDTuner extends LinearOpMode {
     @Override
     public void runOpMode() {
         final PulsarRobotHardware hw = new PulsarRobotHardware(this, null);
-        final StraightPIDController straightPIDController = new ForwardPIDController(hw);
+        final StraightPIDController straightPIDController = new StraightPIDController(hw);
         final TurningPIDController turningPIDController = new TurningPIDController(hw);
 
         PIDController pidController = straightPIDController;

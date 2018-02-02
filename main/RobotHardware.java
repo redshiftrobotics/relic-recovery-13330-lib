@@ -6,9 +6,10 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.redshiftrobotics.lib.pid.PIDCalculator;
+import org.redshiftrobotics.lib.pid.imu.IMU;
 
 public interface RobotHardware {
-    BNO055IMU getIMU();
+    IMU getIMU();
     Context getAppContext();
     LinearOpMode getOpMode();
 

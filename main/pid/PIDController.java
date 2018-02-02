@@ -6,13 +6,13 @@ import org.redshiftrobotics.lib.pid.imu.IMU;
 import org.redshiftrobotics.lib.pid.imu.IMUWrapper;
 
 public abstract class PIDController {
+    public static PIDCalculator pidCalculator;
+
     abstract PIDCalculator.PIDTuning getTuning();
     abstract void applyMotorPower(double correction, long elapsedTime);
     boolean predicate() { return true; }
 
-    private final IMU imu;
     protected final RobotHardware hw;
-    protected final PIDCalculator pidCalculator;
 
     private PIDCalculator.PIDTuning tuningOverride;
 
@@ -27,11 +27,12 @@ public abstract class PIDController {
     public PIDController(RobotHardware hw) {
         this.hw = hw;
 
-        imu = new IMUWrapper(hw.getIMU());
-        pidCalculator = new PIDCalculator(imu);
+        if (pidCalculator == null) pidCalculator = new PIDCalculator(hw.getIMU());
     }
 
     protected void move(long time) {
+        DebugHelper.sleep(5000);
+
         pidCalculator.setTuning(tuningOverride != null ? tuningOverride : getTuning());
         pidCalculator.clearData();
 

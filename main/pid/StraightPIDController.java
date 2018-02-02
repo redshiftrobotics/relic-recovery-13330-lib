@@ -5,12 +5,12 @@ import org.redshiftrobotics.lib.RobotHardware;
 import org.redshiftrobotics.lib.Vector2D;
 import org.redshiftrobotics.lib.asam.ASAMController;
 
-abstract class StraightPIDController extends PIDController {
+public class StraightPIDController extends PIDController {
     protected Vector2D velocity;
     protected long time;
     protected long tweenTime;
 
-    StraightPIDController(RobotHardware hw) {
+    public StraightPIDController(RobotHardware hw) {
         super(hw);
     }
 
@@ -27,14 +27,21 @@ abstract class StraightPIDController extends PIDController {
         hw.applyMotorPower(tweenPowerX, tweenPowerY, correction);
     }
 
-    // XXX: Strictly speaking, these don't really belong here, but they make everything else much
-    //      DRYer
     public void move(double speed, long time) {
         move(speed, time, time / 2);
     }
-    abstract public void move(double speed, long time, long tweenTime);
+    public void move(double speed, long time, long tweenTime) {
+        move(time, tweenTime, new Vector2D(0, speed));
+    }
 
-    protected void move(long time, long tweenTime, Vector2D velocity) {
+    public void strafe(double speed, long time) {
+        strafe(speed, time, time / 2);
+    }
+    public void strafe(double speed, long time, long tweenTime) {
+        move(time, tweenTime, new Vector2D(speed, 0));
+    }
+
+    public void move(long time, long tweenTime, Vector2D velocity) {
         this.time = time;
         this.tweenTime = tweenTime;
         this.velocity = velocity;
