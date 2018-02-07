@@ -17,9 +17,9 @@ public class PIDTuner extends LinearOpMode {
 
     private boolean lastB = false, lastX = false, lastY = false, lastA = false, lastLT = false, lastRT = false;
 
-    private static final double P_STEP = 5;
-    private static final double I_STEP = 1e-4;
-    private static final double D_STEP = 1e-3;
+    private static final double P_STEP = 1;
+    private static final double I_STEP = 1;
+    private static final double D_STEP = 1;
 
     @Override
     public void runOpMode() {
@@ -42,6 +42,7 @@ public class PIDTuner extends LinearOpMode {
             final boolean LT = gamepad1.left_trigger > TRIGGER_THRESHOLD;
             final boolean RT = gamepad1.right_trigger > TRIGGER_THRESHOLD;
 
+            telemetry.addData("Tuning", pidController == turningPIDController ? "Turning" : "Straight");
             if (gamepad1.a && !lastA) {
                 pidController = (pidController == turningPIDController) ? straightPIDController : turningPIDController;
             }
@@ -51,6 +52,12 @@ public class PIDTuner extends LinearOpMode {
             double I = tuning.I;
             double D = tuning.D;
             double increment = gamepad1.dpad_down ? -1 : 1;
+
+            if (gamepad1.back) {
+                P = 0;
+                I = 0;
+                D = 0;
+            }
 
             telemetry.addData("P", tuning.P);
             telemetry.addData("I", tuning.I);
