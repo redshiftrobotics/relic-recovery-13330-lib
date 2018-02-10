@@ -1,5 +1,7 @@
 package org.redshiftrobotics.lib.vuforia;
 
+import android.util.Log;
+
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
@@ -41,6 +43,7 @@ public class VuforiaController {
 
     public Col detectColumn() {
         relicTrackables.activate();
+        Log.d("RedshiftVuforiaSaw", RelicRecoveryVuMark.from(relicTemplate).toString());
         return Col.fromVuMark(RelicRecoveryVuMark.from(relicTemplate));
     }
 }
