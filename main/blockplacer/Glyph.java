@@ -11,7 +11,7 @@ public class Glyph {
         }
 
         public static GlyphColor fromRGB(double r, double g, double b) {
-            if (r > 200 && b < 175 && g < 175) return BROWN;
+            if (r > 150 && b < 100 && g < 100) return BROWN;
             else return GRAY;
         }
 

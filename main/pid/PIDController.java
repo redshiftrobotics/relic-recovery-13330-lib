@@ -31,7 +31,7 @@ public abstract class PIDController {
     }
 
     protected void move(long time) {
-        DebugHelper.sleep(2000);
+        DebugHelper.sleep(1000);
 
         pidCalculator.setTuning(tuningOverride != null ? tuningOverride : getTuning());
         pidCalculator.clearData();

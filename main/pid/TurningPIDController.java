@@ -1,9 +1,12 @@
 package org.redshiftrobotics.lib.pid;
 
+import android.util.Log;
+
 import org.redshiftrobotics.lib.RobotHardware;
 
 public class TurningPIDController extends PIDController {
-    private double powerConstant;
+    private static double powerConstant = 0.5;
+    private double powerScalar = 1;
 
     public TurningPIDController(RobotHardware hw) {
         super(hw);
@@ -15,21 +18,21 @@ public class TurningPIDController extends PIDController {
     }
 
     public void turn(double angle, long time){
-        turn(angle, time, 0.5);
+        turn(angle, time, 1);
     }
-    public void turn(double angle, long time, double powerConstant) {
-        this.powerConstant = powerConstant;
+    public void turn(double angle, long time, double powerScalar) {
+        this.powerScalar = powerScalar;
         pidCalculator.addTarget(angle);
 
         move(time);
     }
 
     public void turnToTarget(double target, long time) {
-        turnToTarget(target, time, 0.5);
+        turnToTarget(target, time, 1);
     }
 
-    public void turnToTarget(double target, long time, double powerConstant) {
-        this.powerConstant = powerConstant;
+    public void turnToTarget(double target, long time, double powerScalar) {
+        this.powerScalar = powerScalar;
         pidCalculator.setTarget(target);
 
         move(time);
@@ -37,7 +40,7 @@ public class TurningPIDController extends PIDController {
 
     @Override
     void applyMotorPower(double correction, long elapsedTime) {
-        hw.applyMotorPower(0, 0, powerConstant + correction);
+        hw.applyMotorPower(0, 0, (powerConstant + correction) * powerScalar);
     }
 
     @Override
